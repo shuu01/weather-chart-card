@@ -59,8 +59,8 @@ static getStubConfig(hass, unusedEntities, allEntities) {
       condition_icons: true,
       round_temp: false,
       type: 'daily',
-      number_of_forecasts: '0', 
-      disable_animation: false, 
+      number_of_forecasts: '0',
+      disable_animation: false,
     },
   };
 }
@@ -589,6 +589,13 @@ drawChart({ config, language, weather, forecastItems } = this) {
       },
     };
 
+    if (config.forecast.style === 'style3') {
+      datasets[0].datalabels = {
+        borderRadius: 8,
+        borderWidth: 1.5,
+        padding: 4,
+      };
+
     datasets[1].datalabels = {
       display: function (context) {
         return 'true';
@@ -639,7 +646,7 @@ drawChart({ config, language, weather, forecastItems } = this) {
               callback: function (value, index, values) {
                   var datetime = this.getLabelForValue(value);
                   var dateObj = new Date(datetime);
-        
+
                   var timeFormatOptions = {
                       hour12: config.use_12hour_format,
                       hour: 'numeric',
